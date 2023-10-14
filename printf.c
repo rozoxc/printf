@@ -39,7 +39,7 @@ int _printf(const char *format, ...)
 				{
 							buffer[i++] = *str;
 							str++;
-							chars_printed++
+							chars_printed++;
 						}
 					}
 					break;
