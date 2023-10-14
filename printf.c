@@ -20,26 +20,26 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == 'c')
 			{
-				chars_printed += putchar((int)va_arg(args, int));
+				chars_printed += _putchar((int)va_arg(args, int));
 			}
 			else if (*format == 's')
 			{
 				str = va_arg(args, char *);
 				while (*str != '\0')
 				{
-					chars_printed += putchar(*str);
+					chars_printed += _putchar(*str);
 					str++;
 				}
 			}
 			else if (*format == '%')
 			{
-				chars_printed += putchar('%');
+				chars_printed += _putchar('%');
 			}
 			format++;
 		}
 		else
 		{
-			chars_printed += putchar(*format);
+			chars_printed += _putchar(*format);
 			format++;
 		}
 	}
