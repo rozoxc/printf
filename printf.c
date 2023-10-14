@@ -4,62 +4,46 @@
  * @format:  is a character string.
  * Return: return the number of characters printed
  */
+
 int _printf(const char *format, ...)
 {
 	va_list args;
-	char buffer[1024], *str, c;
-	int i, j, chars_printed;
+	int chars_printed;
+	char *str;
 
-	va_start(args, format);
 	chars_printed = 0;
-	i = 0;
-	j = 0;
+	va_start(args, format);
+	if (format == NULL)
+		format = "";
 	while (*format != '\0')
 	{
-		if (*format != '%')
+		if (*format == '%')
 		{
-			buffer[i++] = *format;
-			chars_printed++;
+			format++;
+			if (*format == 'c')
+			{
+				chars_printed += (char)va_arg(args, int);
+			}
+			else if (*format == 's')
+			{
+				str = va_arg(args, char *);
+				while (*str != '\0')
+				{
+					chars_printed += _putchar(*str);
+					str++;
+				}
+			}
+			else if (*format == '%')
+			{
+				chars_printed += _putchar('%');
+			}
+			format++;
 		}
 		else
 		{
-			switch (*++format)
-			{
-				case 'c':
-					{
-						c = (char)va_arg(args, int);
-						buffer[i++] = c;
-						chars_printed++;
-					}
-					break;
-				case 's':
-					{
-						str = va_arg(args, char *);
-				while (*str != '\0')
-				{
-							buffer[i++] = *str;
-							str++;
-							chars_printed++
-						}
-					}
-					break;
-				case '%':
-					buffer[i++] = '%';
-					chars_printed++;
-					break;
-				default:
-					buffer[i++] = '%';
-					buffer[i++] = *format;
-					chars_printed += 2;
-					break;
-			}
+			chars_printed += _putchar(*format);
+			format++;
 		}
-		format++;
-	}
-	while (j < i)
-	{
-		_putchar(buffer[j]);
-		j++;
 	}
 	va_end(args);
 	return (chars_printed);
