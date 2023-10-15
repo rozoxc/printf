@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * _printf - Custom printf function
  * @format: Format string
@@ -11,24 +10,19 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int printed_chars;
-	char *str;
+	int printed_chars = 0;
+	char *str, c;
 
-	printed_chars = 0;
 	va_start(args, format);
 	while (*format)
 	{
-		if (*format != '%')
-		{
-			_putchar(*format);
-			printed_chars++;
-		}
-		else
+		if (*format == '%' && *(format + 1) != '\0')
 		{
 			format++;
 			if (*format == 'c')
 			{
-				printed_chars += _putchar((char)va_arg(args, int));
+				c = va_arg(args, int);
+				printed_chars += _putchar(c);
 			}
 			else if (*format == 's')
 			{
@@ -42,18 +36,13 @@ int _printf(const char *format, ...)
 					str++;
 				}
 			}
-			else if (*format == '%')
-			{
-				_putchar('%');
-				printed_chars++;
-			}
-			else
-			{
-				_putchar('%');
-				_putchar(*format);
-				printed_chars += 2;
-			}
+		else if (*format == '%')
+			printed_chars += _putchar('%');
+		else
+			printed_chars += _putchar(*format);
 		}
+		else
+			printed_chars += _putchar(*format);
 		format++;
 	}
 	va_end(args);
