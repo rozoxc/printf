@@ -9,55 +9,41 @@
 
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int printed_chars, i, j;
-	char *str, c;
+	int sum;
+	va_list ap;
+	char *p, *str, c;
 
-	printed_chars = 0;
-	va_start(args, format);
-	i = 0;
-	if (format == NULL)
-		return (-1);
-	while (format[i] != '\0')
+	sum = 0;
+	va_start(ap, format);
+
+	for (p = (char *)format; *p; p++)
 	{
-		if (format[i] != '%')
+		if (*p != '%')
 		{
-			_putchar(format[i]);
-			printed_chars++;
+			sum += _putchar(*p);
+			continue;
 		}
-		else
+
+		p++;
+		if (*p == 'c')
 		{
-			i++;
-			switch (format[i])
-			{
-				case 'c':
-				{
-					print_char(arg);
-					printed_chars++;
-					break;
-				}
-				case 's':
-				{
-					str = va_arg(args, char *);
-					if (str == NULL)
-						str = "(null)";
-					 j = 0;
-					while (str[j] != '\0')
-					{
-						_putchar(str[j]);
-						printed_chars++;
-						j++;
-					}
-					break;
-				}
-				case '%':
-					_putchar('%');
-					printed_chars++;
-					break;
-			}
+			c = va_arg(ap, int);
+			sum += _putchar(c);
 		}
-		i++;
+		else if (*p == 's')
+		{
+			str = va_arg(ap, char *);
+			if (!str)
+				str = "(null)";
+			sum += _puts(str);
+		}
+		else if (*p == '%')
+		{
+			sum += _putchar('%');
+		}
 	}
-	va_end(args);
-	return (printed_chars);
+
+	_putchar(BUF_FLUSH);
+	va_end(ap);
+	return (sum);
 }
