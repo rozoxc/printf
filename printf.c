@@ -35,7 +35,7 @@ int _printf(const char *format, ...)
 			{
 				str = va_arg(args, char *);
 				if (str == NULL)
-					str = "(null)";
+					str = "";
 				while (*str)
 				{
 					_putchar(*str);
