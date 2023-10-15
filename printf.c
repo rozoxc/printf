@@ -16,33 +16,43 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	while (*format)
 	{
-		if (*format == '%' && *(format + 1) != '\0')
+		if (*format != '%')
 		{
-			format++;
-			if (*format == 'c')
-			{
-				c = va_arg(args, int);
-				printed_chars += _putchar(c);
-			}
-			else if (*format == 's')
-			{
-				str = va_arg(args, char *);
-				if (str == NULL)
-					str = "";
-				while (*str)
-				{
-					_putchar(*str);
-					printed_chars++;
-					str++;
-				}
-			}
-		else if (*format == '%')
-			printed_chars += _putchar('%');
-		else
-			printed_chars += _putchar(*format);
+			_putchar(*format);
+			printed_chars++;
 		}
 		else
-			printed_chars += _putchar(*format);
+		{
+			format++;
+			switch (*format)
+			{
+				case 'c':
+				{
+					c = va_arg(args, int);
+					_putchar(c);
+					printed_chars++;
+					break;
+				}
+				case 's':
+				{
+					str = va_arg(args, char *);
+					if (!str)
+						str = "(null)";
+					while (*str)
+					{
+						_putchar(*str);
+						printed_chars++;
+						str++;
+
+					}	
+					break;
+				}
+				case '%':
+					_putchar('%');
+					printed_chars++;
+					break;
+			}	
+		}
 		format++;
 	}
 	va_end(args);
