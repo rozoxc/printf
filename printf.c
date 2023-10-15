@@ -9,11 +9,11 @@
 
 int _printf(const char *format, ...)
 {
-	int sum = 0;
+	int sum ;
 	va_list ap;
-	char *p, *str;
-	int c;
+	char *p, *str, c;
 
+	sum = 0;
 	va_start(ap, format);
 
 	for (p = (char *)format; *p; p++)
@@ -27,7 +27,7 @@ int _printf(const char *format, ...)
 		p++;
 		if (*p == 'c')
 		{
-			c = va_arg(ap, char *);
+			c = va_arg(ap, int);
 			sum += _putchar(c);
 		}
 		else if (*p == 's')
