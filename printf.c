@@ -32,8 +32,7 @@ int _printf(const char *format, ...)
 			{
 				case 'c':
 				{
-					c = va_arg(args, int);
-					_putchar(c);
+					print_char(arg);
 					printed_chars++;
 					break;
 				}
