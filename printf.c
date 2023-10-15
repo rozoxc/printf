@@ -9,11 +9,7 @@
 
 int _printf(const char *format, ...)
 {
-<<<<<<< HEAD
-	int sum ;
-=======
 	int sum;
->>>>>>> 8fb81ca7a9fa0513682bb920365dba776eebc0c3
 	va_list ap;
 	char *p, *str, c;
 
