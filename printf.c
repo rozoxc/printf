@@ -10,40 +10,52 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int printed_chars = 0;
+	int printed_chars, i, j;
 	char *str, c;
 
+    printed_chars = 0;
 	va_start(args, format);
-	while (*format)
+    i = 0;
+	while (format[i] != '\0')
 	{
-		if (*format == '%' && *(format + 1) != '\0')
+		if (format[i] != '%')
 		{
-			format++;
-			if (*format == 'c')
-			{
-				c = va_arg(args, int);
-				printed_chars += _putchar(c);
-			}
-			else if (*format == 's')
-			{
-				str = va_arg(args, char *);
-				if (str == NULL)
-					str = "";
-				while (*str)
-				{
-					_putchar(*str);
-					printed_chars++;
-					str++;
-				}
-			}
-		else if (*format == '%')
-			printed_chars += _putchar('%');
-		else
-			printed_chars += _putchar(*format);
+			_putchar(format[i]);
+			printed_chars++;
 		}
 		else
-			printed_chars += _putchar(*format);
-		format++;
+		{
+			i++;
+			switch (format[i])
+			{
+				case 'c':
+				{
+					c = va_arg(args, int);
+					_putchar(c);
+					printed_chars++;
+					break;
+				}
+				case 's':
+				{
+					str = va_arg(args, char *);
+					if (str == NULL)
+						str = "(null)";
+					 j = 0;
+					while (str[j] != '\0')
+					{
+						_putchar(str[j]);
+						printed_chars++;
+						j++;
+				    }	
+					break;
+				}
+				case '%':
+					_putchar('%');
+					printed_chars++;
+					break;
+			}	
+		}
+		i++;
 	}
 	va_end(args);
 	return (printed_chars);
