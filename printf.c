@@ -11,7 +11,7 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int printed_chars;
-	char c, *str;
+	char *str;
 
 	printed_chars = 0;
 	va_start(args, format);
@@ -27,9 +27,7 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == 'c')
 			{
-				c = va_arg(args, int);
-				_putchar(c);
-				printed_chars++;
+				printed_chars += _putchar((char)va_arg(args, int));
 			}
 			else if (*format == 's')
 			{
