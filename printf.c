@@ -13,9 +13,9 @@ int _printf(const char *format, ...)
 	int printed_chars, i, j;
 	char *str, c;
 
-    printed_chars = 0;
+	printed_chars = 0;
 	va_start(args, format);
-    i = 0;
+	i = 0;
 	while (format[i] != '\0')
 	{
 		if (format[i] != '%')
@@ -46,14 +46,14 @@ int _printf(const char *format, ...)
 						_putchar(str[j]);
 						printed_chars++;
 						j++;
-				    }	
+					}
 					break;
 				}
 				case '%':
 					_putchar('%');
 					printed_chars++;
 					break;
-			}	
+			}
 		}
 		i++;
 	}
