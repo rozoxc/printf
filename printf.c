@@ -9,6 +9,7 @@ int _printf(const char *format, ...)
 {
 	int sum = 0;
 	va_list args;
+	char c, *str;
 
 	va_start(args, format);
 	if (!format || !format[0])
@@ -20,11 +21,13 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == 'c')
 			{
-				sum += _putchar(va_arg(args, int));
+				c = va_arg(args, int);
+				sum += _putchar(c);
 			}
 			else if (*format == 's')
 			{
-				sum += display_string(va_arg(args, char *));
+				str = va_arg(args, char *);
+				sum += display_string(str);
 			}
 			else if (*format == '%')
 			{
@@ -52,4 +55,4 @@ int _printf(const char *format, ...)
 	}
 	va_end(args);
 	return (sum);
-}
+}  
