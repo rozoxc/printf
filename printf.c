@@ -7,10 +7,11 @@
  */
 int _printf(const char *format, ...)
 {
-	int sum = 0;
+	int sum;
 	va_list args;
 
 	va_start(args, format);
+	sum = 0;
 	if (!format || !format[0])
 		return (-1);
 	while (*format)
@@ -44,7 +45,7 @@ int _printf(const char *format, ...)
 			format++;
 		}
 		else
-		{ 
+		{
 			_putchar(*format);
 			format++;
 			sum++;
