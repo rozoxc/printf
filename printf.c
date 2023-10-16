@@ -3,47 +3,53 @@
  * _printf - Custom printf function
  * @format: Format string
  * @...: Variable number of arguments
- *
  * Return: Number of characters printed
  */
-
 int _printf(const char *format, ...)
 {
-	int sum;
-	va_list ap;
-	char *p, *str, c;
+	int sum = 0;
+	va_list args;
 
-	sum = 0;
-	va_start(ap, format);
-
-	for (p = (char *)format; *p; p++)
+	va_start(args, format);
+	if (!format || !format[0])
+		return (-1);
+	while (*format)
 	{
-		if (*p != '%')
+		if (*format == '%')
 		{
-			sum += _putchar(*p);
-			continue;
+			format++;
+			if (*format == 'c')
+			{
+				sum += _putchar(va_arg(args, int));
+			}
+			else if (*format == 's')
+			{
+				sum += display_string(va_arg(args, char *));
+			}
+			else if (*format == '%')
+			{
+				_putchar('%');
+				sum++;
+			}
+			else
+			{
+				_putchar('%');
+				sum++;
+				if (*format)
+				{
+					_putchar(*format);
+					sum++;
+				}
+			}
+			format++;
 		}
-
-		p++;
-		if (*p == 'c')
-		{
-			c = va_arg(ap, int);
-			sum += _putchar(c);
-		}
-		else if (*p == 's')
-		{
-			str = va_arg(ap, char *);
-			if (!str)
-				str = "(null)";
-			sum += _puts(str);
-		}
-		else if (*p == '%')
-		{
-			sum += _putchar('%');
+		else
+		{ 
+			_putchar(*format);
+			format++;
+			sum++;
 		}
 	}
-
-	_putchar(BUF_FLUSH);
-	va_end(ap);
+	va_end(args);
 	return (sum);
 }
