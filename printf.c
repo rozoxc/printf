@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * _printf - Custom printf function
  * @format: Format string
@@ -7,53 +8,37 @@
  */
 int _printf(const char *format, ...)
 {
-	int sum;
+	int i = 0, j = 0;
+	int (*f)(va_list);
 	va_list args;
-	char c, *str;
 
 	va_start(args, format);
-	sum = 0;
-	if (!format || !format[0])
+	if (format == NULL || !format[i + 1])
 		return (-1);
-	while (*format)
+	while (format[i])
 	{
-		if (*format == '%')
+		if (format[i] == '%' && format[i + 1])
 		{
-			format++;
-			if (*format == 'c')
+			f = get_func(&format[i + 1]);
+			if (f)
 			{
-				c = va_arg(args, int);
-				sum += _putchar(c);
-			}
-			else if (*format == 's')
-			{
-				str = va_arg(args, char *);
-				sum += display_string(str);
-			}
-			else if (*format == '%')
-			{
-				_putchar('%');
-				sum++;
+				j += f(args);
+				i++;
 			}
 			else
 			{
-				_putchar('%');
-				sum++;
-				if (*format)
-				{
-					_putchar(*format);
-					sum++;
-				}
+				_putchar(format[i]);
+				j++;
 			}
-			format++;
 		}
 		else
 		{
-			_putchar(*format);
-			format++;
-			sum++;
+			_putchar(format[i]);
+			j++;
 		}
+		i++;
 	}
 	va_end(args);
-	return (sum);
+	return (j);
 }
+

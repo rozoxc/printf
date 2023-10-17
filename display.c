@@ -1,12 +1,18 @@
 #include "main.h"
 
 /**
- * _putchar - dsplay the char
- * @c: the cha to display
- * Return: 1 success otherwise -1
+ * get_func - check for valid specifier
+ * @format: a character to check
+ * Return: a pointer to the function
  */
-
-int _putchar(char c)
+int (*get_func(const char *format))(va_list)
 {
-	return (write(1, &c, 1));
+	switch (*format)
+	{
+		case 'c': return display_char;
+		case 's': return display_str;
+		case '%': return display_pct;
+		default: return NULL;
+	}
 }
+
