@@ -7,16 +7,13 @@
 
 int display_string(char *str)
 {
-	int i = 0;
+	int i;
+
 	if (str == NULL)
-	{
-		display_string("(null)");
-		return (0);
-	}
-	while (str[i])
+		str = "(null)";
+	for (i = 0; str[i]; i++)
 	{
 		_putchar(str[i]);
-		i++;
 	}
 	return (i);
 }
