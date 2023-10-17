@@ -10,7 +10,8 @@ int display_string(char *str)
 	int i = 0;
 	if (str == NULL)
 	{
-		return (display_string("(null)"));
+		display_string("(null)");
+		return;
 	}
 	while (str[i])
 	{
