@@ -27,11 +27,13 @@ int display_str(va_list args)
 	int j;
 	char *str = va_arg(args, char *);
 
+	j = 0;
 	if (str == NULL)
 		str = "(null)";
-	for (j = 0; str[j]; j++)
+	while (str[j] != '\0')
 	{
 		_putchar(str[j]);
+		j++;
 	}
 	return (j);
 }
