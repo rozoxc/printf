@@ -1,50 +1,49 @@
 #include "main.h"
 /**
- * _condition - function checke condition
- * @s: character
- */
-
-void _condition(char s)
-{
-	_putchar(s);
-}
-/**
  * _printf - Custom printf function
  * @format: Format string
  * @...: Variable number of arguments
  * Return: Number of characters printed
  */
-
 int _printf(const char *format, ...)
 {
-	int sum = 0;
+	int sum;
 	va_list args;
+	char c, *str;
 
 	va_start(args, format);
+	sum = 0;
 	if (!format || !format[0])
 		return (-1);
 	while (*format)
 	{
 		if (*format == '%')
 		{
-			sum++;
 			format++;
 			if (*format == 'c')
 			{
-				sum += _putchar(va_arg(args, int));
+				c = va_arg(args, int);
+				sum += _putchar(c);
 			}
 			else if (*format == 's')
 			{
-				sum += display_string(va_arg(args, char *));
+				str = va_arg(args, char *);
+				sum += display_string(str);
 			}
 			else if (*format == '%')
 			{
 				_putchar('%');
+				sum++;
 			}
 			else
 			{
 				_putchar('%');
-				_condition(*format);
+				sum++;
+				if (*format)
+				{
+					_putchar(*format);
+					sum++;
+				}
 			}
 			format++;
 		}
@@ -52,7 +51,8 @@ int _printf(const char *format, ...)
 		{
 			_putchar(*format);
 			format++;
-	}
+			sum++;
+		}
 	}
 	va_end(args);
 	return (sum);
