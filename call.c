@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- *print_char - prints character
+ *display_char - prints character
  *@args: argument
  *
  *Return: character
@@ -16,7 +16,7 @@ int display_char(va_list args)
 
 
 /**
- *print_str - prints string
+ *display_str - prints string
  *@args: arguments
  *Return: string
  */
@@ -37,7 +37,7 @@ int display_str(va_list args)
 }
 
 /**
- *print_pct - prints character "%"
+ *display_pct - prints character "%"
  *@args : arguments
  *
  *Return: character "%"
