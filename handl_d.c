@@ -1,7 +1,8 @@
 #include "main.h"
 
 /**
- * display_num - prints decimal
+ * display_num - prints num
+ *  - prints decimal
  * @args: the argument decimal
  *
  * Return: counter
@@ -9,33 +10,29 @@
 int display_num(va_list args)
 {
 	int value, count = 0;
-	unsigned int abs, temp;
-	char buffer[12];
-
+	unsigned int zef, temp, divisor = 1;
 	value = va_arg(args, int);
-
 	if (value < 0)
 	{
 		count += _putchar('-');
-		abs = (value == INT_MIN) ? -(value + 1) + 1 : -value;
+		zef = (value == INT_MIN) ? -(value + 1) + 1 : -value;
 	}
 	else
-		abs = value;
+		zef = value;
 
-	temp = abs;
-	while (temp > 0)
+	temp = zef;
+	while (temp > 9)
 	{
-		buffer[count++] = (temp % 10) + '0';
 		temp /= 10;
+		divisor *= 10;
 	}
 
-	if (count == 0)
-		buffer[count++] = '0';
-
-	while (count > 0)
+	temp = zef;
+	while (divisor > 0)
 	{
-		_putchar(buffer[--count]);
+		count += _putchar((temp / divisor) + '0');
+		temp %= divisor;
+		divisor /= 10;
 	}
-
-	return  (count);
+	return (count);
 }
