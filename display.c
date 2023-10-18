@@ -9,18 +9,13 @@ int (*get_func(const char *format))(va_list)
 {
 	switch (*format)
 	{
-		case 'c': 
-			return display_char;
-		case 's':
-			return display_str;
-		case '%':
-			return display_pct;
-		case 'd':
-			return display_num;
-		case 'i':
-			return display_num;
+		case 'c': return display_char;
+		case 's': return display_str;
+		case '%': return display_pct;
+		case 'd': return display_num;
+		case 'i': return display_num;
 		default:
-			return NULL;
+		return (NULL);
 	}
 }
 

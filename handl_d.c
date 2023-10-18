@@ -2,7 +2,6 @@
 
 /**
  * display_num - prints num
- *  - prints decimal
  * @args: the argument decimal
  *
  * Return: counter
@@ -11,6 +10,7 @@ int display_num(va_list args)
 {
 	int value, count = 0;
 	unsigned int zef, temp, divisor = 1;
+
 	value = va_arg(args, int);
 	if (value < 0)
 	{
