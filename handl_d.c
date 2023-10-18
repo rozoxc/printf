@@ -4,38 +4,50 @@
  * display_num - prints decimal
  * @args: the argument decimal
  *
- * Return: counter
+ * Return: number of characters printed
  */
 int display_num(va_list args)
 {
-	int value, count = 0;
-	unsigned int abs, temp;
-	char buffer[12];
+    int value = va_arg(args, int);
+    int count = 0;
 
-	value = va_arg(args, int);
+    if (value < 0)
+    {
+        _putchar('-');
+        count++;
+        value = -value;
+    }
 
-	if (value < 0)
+    if (value == 0)
+    {
+        _putchar('0');
+        count++;
+    } 
+    else
+    {
+        int num_digits = 0;
+        int temp = value;
+        while (temp > 0)
 	{
-		count += _putchar('-');
-		abs = (value == INT_MIN) ? -(value + 1) + 1 : -value;
-	}
-	else
-		abs = value;
-
-	temp = abs;
-	while (temp > 0)
+            temp /= 10;
+            num_digits++;
+        }
+        while (num_digits > 0)
 	{
-		buffer[count++] = (temp % 10) + '0';
-		temp /= 10;
-	}
+            int divisor = 1;
+            for (int i = 1; i < num_digits; i++)
+	    {
+                divisor *= 10;
+            }
+            int digit;
+	    digit = value / divisor;
+            _putchar(digit + '0');
+            count++;
+            value -= digit * divisor;
+            num_digits--;
+       }
+    }
 
-	if (count == 0)
-		buffer[count++] = '0';
-
-	while (count > 0)
-	{
-		_putchar(buffer[--count]);
-	}
-
-	return  (count);
+    return count;
 }
+

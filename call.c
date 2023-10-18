@@ -30,7 +30,7 @@ int display_str(va_list args)
 	j = 0;
 	if (str == NULL)
 		str = "(null)";
-	while (str[j] != '\0')
+	while (str[j])
 	{
 		_putchar(str[j]);
 		j++;
