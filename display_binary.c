@@ -5,7 +5,7 @@
  * @args: Number to print in base 2
  *
  * Return: Length of the numbers in binary
- **/
+**/
 int display_binary(va_list args)
 {
 	unsigned int num = va_arg(args, unsigned int);
