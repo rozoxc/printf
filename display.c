@@ -14,6 +14,7 @@ int (*get_func(const char *format))(va_list)
 		case '%': return display_pct;
 		case 'd': return display_num;
 		case 'i': return display_num;
+		case 'b': return display_binary;
 		default:
 		return (NULL);
 	}
