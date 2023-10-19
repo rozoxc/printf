@@ -1,53 +1,38 @@
 #include "main.h"
 
 /**
- * display_num - prints decimal
+ * display_num - prints num
  * @args: the argument decimal
  *
- * Return: number of characters printed
+ * Return: counter
  */
 int display_num(va_list args)
 {
-    int value = va_arg(args, int);
-    int count = 0;
+	int value, count = 0;
+	unsigned int zef, temp, divisor = 1;
 
-    if (value < 0)
-    {
-        _putchar('-');
-        count++;
-        value = -value;
-    }
-
-    if (value == 0)
-    {
-        _putchar('0');
-        count++;
-    } 
-    else
-    {
-        int num_digits = 0;
-        int temp = value;
-        while (temp > 0)
+	value = va_arg(args, int);
+	if (value < 0)
 	{
-            temp /= 10;
-            num_digits++;
-        }
-        while (num_digits > 0)
-	{
-            int divisor = 1;
-            for (int i = 1; i < num_digits; i++)
-	    {
-                divisor *= 10;
-            }
-            int digit;
-	    digit = value / divisor;
-            _putchar(digit + '0');
-            count++;
-            value -= digit * divisor;
-            num_digits--;
-       }
-    }
+		count += _putchar('-');
+		zef = (value == INT_MIN) ? -(value + 1) + 1 : -value;
+	}
+	else
+		zef = value;
 
-    return count;
+	temp = zef;
+	while (temp > 9)
+	{
+		temp /= 10;
+		divisor *= 10;
+	}
+
+	temp = zef;
+	while (divisor > 0)
+	{
+		count += _putchar((temp / divisor) + '0');
+		temp %= divisor;
+		divisor /= 10;
+	}
+	return (count);
 }
-

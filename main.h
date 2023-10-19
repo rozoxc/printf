@@ -26,4 +26,6 @@ int display_str(va_list args);
 int display_char(va_list args);
 int display_pct(va_list args);
 int display_num(va_list args);
+void decimalToBinary(int decimal_number);
+
 #endif
