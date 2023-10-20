@@ -9,4 +9,8 @@ Writing a function that produces output according to a format.
 	- c
 	- s
 	- %
+	- d
+	- i
+	- b
+	- u o x
 
