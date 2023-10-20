@@ -15,6 +15,10 @@ int (*get_func(const char *format))(va_list)
 		case 'd': return display_num;
 		case 'i': return display_num;
 		case 'b': return display_binary;
+		case 'u': return display_unsignd;
+		case 'o': return display_octal;
+		case 'x': return display_hexadl;
+		case 'X': return display_hexau;
 		default:
 		return (NULL);
 	}
