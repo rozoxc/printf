@@ -1,44 +1,34 @@
 #include "main.h"
 
 /**
- * display_binary - Print a number in base 2
- * @args: Number to print in base 2
- *
- * Return: Length of the numbers in binary
-**/
+ * display_binary - Prints the binary representation of an unsigned integer.
+ * @args: va_list containing the unsigned integer to be printed in binary.
+ * Return: Number of characters printed.
+ */
 int display_binary(va_list args)
 {
-	int decimal_number = va_arg(args, int);
-	int binary[32];
-	int i = 0;
-	int printed_chars = 0;
-	int j;
+	unsigned int n = va_arg(args, unsigned int);
+	int count = 0;
+	int significantBitFound = 0;
+	int i;
+	char bit;
 
-	if (decimal_number < 0)
+	for (i = 31; i >= 0; i--)
 	{
-		decimal_number = -decimal_number;
-		_putchar('-');
-		printed_chars++;
-	}
+		bit = (n & (1 << i)) ? '1' : '0';
+		if (bit == '1')
+			significantBitFound = 1;
 
-	if (decimal_number == 0)
+		if (significantBitFound)
+		{
+			_putchar(bit);
+			count++;
+		}
+	}
+	if (count == 0)
 	{
 		_putchar('0');
-		printed_chars++;
+		count++;
 	}
-	else
-	{
-		while (decimal_number > 0)
-		{
-			binary[i] = decimal_number % 2;
-			decimal_number = decimal_number / 2;
-			i++;
-		}
-		for (j = i - 1; j >= 0; j--)
-		{
-			_putchar('0' + binary[j]);
-			printed_chars++;
-		}
-	}
-	return (printed_chars);
+	return (count);
 }
