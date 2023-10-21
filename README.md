@@ -12,5 +12,4 @@ Writing a function that produces output according to a format.
 	- d
 	- i
 	- b
-	- u o x
 
