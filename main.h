@@ -6,7 +6,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <limits.h>
-#include <string.h>
 
 /**
  * struct func_type - type structure
@@ -28,14 +27,6 @@ int display_char(va_list args);
 int display_pct(va_list args);
 int display_num(va_list args);
 int display_binary(va_list args);
-int display_unsignd(va_list args);
-int display_octal(va_list args);
-int display(unsigned long int num, const char *map, int base, int uppercase);
-int display_hexadl(va_list args);
-int display_hexau(va_list args);
-
-
-
 
 
 #endif
